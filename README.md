@@ -1,5 +1,7 @@
 # MyStorage App
 
+file:///home/chi/Videos/Screencasts/Screencast%20from%202026-09-20%2015-28-57.webm
+
 A Streamlit + PostgreSQL demo application for MyStorage analytics and AI assistant.
 
 ## Prerequisites
@@ -28,19 +30,8 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-# 4. Configure environment variables
 
-Set DB connection info (defaults are shown):
-
-```bash
-export DB_HOST=localhost
-export DB_PORT=5433
-export DB_NAME=mystorage_db
-export DB_USER=myuser
-export DB_PASSWORD=mypassword
-```
-
-# 5. Run PostgreSQL
+# 4. Run PostgreSQL
 
 Option A — using Docker Compose (recommended for reproducible local DB):
 
@@ -48,13 +39,13 @@ Option A — using Docker Compose (recommended for reproducible local DB):
 docker compose up -d
 ```
 
-# 6. Initialize schema
+# 5. Initialize schema
 
 ```bash
 PGPASSWORD=mypassword psql -h localhost -p 5433 -U myuser -d mystorage_db -f schema.sql
 ```
 
-# 7. Seed the database
+# 6. Seed the database
 
 The repository includes `seed_data.py` with a CLI entry. Run it with the same env vars to populate initial data:
 
@@ -64,7 +55,7 @@ The repository includes `seed_data.py` with a CLI entry. Run it with the same en
 
 If the DB is already seeded the script will detect and skip.
 
-# 8. Run the Streamlit app
+# 7. Run the Streamlit app
 
 Run using the included `uv` wrapper (used in this workspace) or directly via streamlit:
 
@@ -74,5 +65,10 @@ uv run streamlit run app.py
 ```
 Open the local URL printed in the terminal (`http://localhost:8501`).
 
+# 8 Example question you can query 
+1. Danh sách hợp đồng sắp hết hạn
+2. Tình trạng sức chứa các Kho Điều Hòa
+3. Kho quận 2 còn trống
+4. Tổng số lượng slot phân theo kho và quận
 
 
