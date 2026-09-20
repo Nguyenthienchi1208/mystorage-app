@@ -1,0 +1,43 @@
+version: '3.8'
+
+services:
+  # 1. Database PostgreSQL
+  postgres_db:
+    image: postgres:15-alpine
+    container_name: mystorage_postgres
+    restart: always
+    environment:
+      POSTGRES_DB: mystorage_db
+      POSTGRES_USER: myuser
+      POSTGRES_PASSWORD: mypassword
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgdata_bytes:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U myuser -d mystorage_db"]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  # 2. Web App Streamlit
+  web_app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: mystorage_app
+    restart: always
+    ports:
+      - "8501:8501"
+    environment:
+      DB_HOST: postgres_db
+      DB_NAME: mystorage_db
+      DB_USER: myuser
+      DB_PASSWORD: mypassword
+      DB_PORT: 5432
+    depends_on:
+      postgres_db:
+        condition: service_healthy 
+
+volumes:
+  pgdata_bytes:
