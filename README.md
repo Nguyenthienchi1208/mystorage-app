@@ -1,7 +1,5 @@
 # MyStorage App
 
-file:///home/chi/Videos/Screencasts/Screencast%20from%202026-09-20%2015-28-57.webm
-
 A Streamlit + PostgreSQL demo application for MyStorage analytics and AI assistant.
 
 ## Prerequisites
